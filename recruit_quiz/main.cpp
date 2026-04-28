@@ -43,10 +43,14 @@ int main()
 
 	x = uniform_int_distribution<>(1, 10)(rand);
 	y = uniform_int_distribution<>(1, 5)(rand)*3;
-	questions.push_back({ "底面積の半径" + to_string(x) + "cm、高さ" + to_string(y) + "cmの円錐がある。\n" + "この円錐の体積をXπcm^3とする" ,
+	questions.push_back({ "底面積の半径" + to_string(x) + "cm、高さ" + to_string(y) + "cmの円錐がある。\n" + "この円錐の体積をXπcm^3とする。Xの値を求めよ。" ,
 		x * x * y / 3});
 
-
+	x = uniform_int_distribution<>(1, 5)(rand) * 3;
+	questions.push_back({
+		"半径" + to_string(x) + "cmの球がある。\n" + "この球の体積をXπcm^3とする。Xの値を求めよ。"
+		,x * x * x * 4/3
+		});
 
 	cout << "[リクルート試験対策クイズ]\n";
 
