@@ -87,6 +87,24 @@ int main()
 		to_string(z)
 		});
 
+	//組合せ
+	//順列
+	x = uniform_int_distribution<>(3, 6)(rand);
+	y = uniform_int_distribution<>(1, x)(rand);
+	z = 1;
+	for (int i = 0; i < y; i++)
+	{
+		z *= x - i;
+	}
+	for (int i = 0; i < y; i++)
+	{
+		z /= y - i;
+	}
+	questions.push_back({
+		to_string(x) + "人のうち" + to_string(y) + "人を選んで並べる方法は何通りあるか?",
+		to_string(z)
+		});
+
 
 	cout << "[リクルート試験対策クイズ]\n";
 
