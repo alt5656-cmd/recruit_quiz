@@ -88,7 +88,6 @@ int main()
 		});
 
 	//‘g‡‚¹
-	//‡—ñ
 	x = uniform_int_distribution<>(3, 6)(rand);
 	y = uniform_int_distribution<>(1, x)(rand);
 	z = 1;
