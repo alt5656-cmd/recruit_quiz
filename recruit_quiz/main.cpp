@@ -1,15 +1,11 @@
 #include <iostream>
-#include <string>
 #include<vector>
 #include <random>
+#include"question.h"
 
 using namespace std;
 
-struct Question
-{
-	string q;
-	string a;
-};
+
 
 //Å‘åŒö–ñ”‚ğ‹‚ß‚é
 int gcd(int a, int b)
@@ -26,7 +22,7 @@ int gcd(int a, int b)
 
 int main()
 {
-	vector<Question> questions(3);
+	QuestionList questions(3);
 
 	random_device rd;
 	mt19937 rand(rd());
