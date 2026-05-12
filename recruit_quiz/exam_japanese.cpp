@@ -61,3 +61,48 @@ QuestionList CreateKanjiExam()
 
 	return question;
 }
+
+//慣用句作成
+QuestionList CreateIdiomExam()
+{
+	static const struct
+	{
+		const char* idiom;
+		const char* meaning;
+	}data[] = {
+		{"気のおけない","気づかいがいらない"},
+		{"琴線に触れる","心から感動する"},
+		{"汚名をそそぐ","名誉を挽回する"},
+		{"言質を取る","証拠となる言葉を聞き出す"},
+		{"糠に釘","効き目がない"},
+	};
+
+	constexpr int quizCount = 5;
+	QuestionList question;
+	question.reserve(quizCount);   //容量確保　　容量が不明な場合push_backするごとにメモリを確保しに行くことになるので、
+	//ある程度入れる目安が決まっている場合、する方がよい  = 生配列とほぼ一緒
+	const vector<int> indices = CreateRandomIndices(size(data));
+	random_device rd;
+
+	for (int i = 0; i < quizCount; i++)
+	{
+		//間違った番号をランダムに選ぶ
+		const int correctIndex = indices[i];
+		vector<int> answers = CreateWrongIndices(size(data), correctIndex);
+
+		//ランダムな位置を正しい番号で上書き
+		const int correctNo = uniform_int_distribution<>(1, 3)(rd);
+		answers[correctNo - 1] = correctIndex;
+
+		//問題作成
+		string s = "「" + string(data[correctIndex].idiom) + "」を意味として正しい番号を選べ";
+		for (int j = 0; j < 3; j++)
+		{
+			s += "\n " + to_string(j + 1) + ":" + data[answers[j]].meaning;
+		}
+
+		question.push_back({ s,to_string(correctNo) });
+	}
+
+	return question;
+}

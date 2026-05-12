@@ -3,3 +3,5 @@
 
 QuestionList CreateKanjiExam();
 
+//Šµ—p‹å
+QuestionList CreateIdiomExam();
