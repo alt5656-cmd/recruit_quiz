@@ -2,6 +2,7 @@
 #include<vector>
 #include <random>
 #include"question.h"
+#include"exam_japanese.h"
 
 using namespace std;
 
@@ -102,6 +103,18 @@ int main()
 
 
 	cout << "[リクルート試験対策クイズ]\n";
+
+	cout << "教科を選んでください\n1=数学\n2=国語\n";
+	int subject;
+	cin >> subject;
+	switch (subject)
+	{
+	case 1:
+		break;
+	case 2:
+		questions = CreateKanjiExam();
+		break;
+	}
 
 	for (const auto& e : questions) {
 		cout << e.q << "\n";
