@@ -1,4 +1,5 @@
 #include"exam_japanese.h"
+#include"utility.h"
 using namespace std;
 
 //漢字の読み取り問題
@@ -21,9 +22,10 @@ QuestionList CreateKanjiExam()
 	QuestionList question;
 	question.reserve(quizCount);   //容量確保　　容量が不明な場合push_backするごとにメモリを確保しに行くことになるので、
 	                                           //ある程度入れる目安が決まっている場合、する方がよい  = 生配列とほぼ一緒
+	const vector<int> indices = CreateRandomIndices(size(data));
 	for (int i = 0; i < quizCount; i++)
 	{
-		const auto& e = data[i];
+		const auto& e = data[indices[i]];
 		question.push_back({ "「" + string(e.kanji) + "」の読みをひらがなで答えよ" , e.reading });
 	}
 
