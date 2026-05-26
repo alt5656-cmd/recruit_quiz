@@ -107,6 +107,7 @@ QuestionList CreateIdiomExam()
 	return question;
 }
 
+
 QuestionList CreateHomophoneExam()
 {
 	const struct {
@@ -173,5 +174,45 @@ QuestionList CreateHomophoneExam()
 		question.push_back({ s, to_string(correctNo) });
 	}
 
+	return question;
+}
+
+QuestionList CreateAntonyExam()
+{
+	const struct {
+		const char* kanji[2];
+	}data[] = {
+		{"ˆÓ}","œ“ˆÓ"},{"ù—v","‹Ÿ‹‹" },
+		{"ŒÌˆÓ","‰ß¸"},{"B–†","–¾—Ä" },
+		{"‹Ù’£","’oŠÉ"},{"‰ß‘a","‰ß–§" },
+		{"‰h“]","¶‘J"},{"Á”ï","¶Y" },
+		{"ˆÙ’[","³“"},{"‘¸Œh","Œy•Ì" },
+	};
+
+	constexpr int quizCount = 5;
+	QuestionList question;
+	question.reserve(quizCount);
+	const vector<int> indices = CreateRandomIndices(size(data));
+	random_device rd;
+
+	for (int i = 0; i < quizCount; i++)
+	{
+		const int correctIndex = indices[i];
+		vector<int> answers = CreateWrongIndices(size(data), correctIndex);
+
+		//ƒ‰ƒ“ƒ_ƒ€‚ÈˆÊ’u‚ğ³‚µ‚¢”Ô†‚Åã‘‚«
+		const int correctNo = uniform_int_distribution<>(1, 3)(rd);
+		answers[correctNo - 1] = correctIndex;
+
+		//–â‘èì¬
+		const int object = uniform_int_distribution<>(0, 1)(rd);
+		const int other = (object + 1) % 2;
+		string s = "u" + string(data[correctIndex].kanji[object]) + "v‚Ì‘Î‹`Œê‚Æ‚µ‚Ä³‚µ‚¢”Ô†‚ğ‘I‚×";
+		for (int j = 0; j < 4; i++)
+		{
+			s += "\n@" + to_string(j + 1) + ":" + data[answers[j]].kanji[other];
+		}
+		question.push_back({ s,to_string(correctNo) });
+	}
 	return question;
 }

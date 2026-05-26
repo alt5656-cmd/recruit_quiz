@@ -8,3 +8,6 @@ QuestionList CreateIdiomExam();
 
 //“¯ŒPˆÓ‹`
 QuestionList CreateHomophoneExam();
+
+//‘Î‹`Œê
+QuestionList CreateAntonyExam();
