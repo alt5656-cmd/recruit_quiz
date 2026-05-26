@@ -5,3 +5,6 @@ QuestionList CreateKanjiExam();
 
 //Šµ—p‹å
 QuestionList CreateIdiomExam();
+
+//“¯ŒPˆÓ‹`
+QuestionList CreateHomophoneExam();
