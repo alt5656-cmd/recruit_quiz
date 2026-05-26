@@ -119,6 +119,8 @@ int main()
 		questions.insert(questions.end(), homophoneExam.begin(), homophoneExam.end());
 		QuestionList antonyExam = CreateAntonyExam();
 		questions.insert(questions.end(), antonyExam.begin(), antonyExam.end());
+		QuestionList synonyExam = CreateSynonymExam();
+		questions.insert(questions.end(), synonyExam.begin(), synonyExam.end());
 		break;
 	}
 
