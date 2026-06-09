@@ -2,3 +2,5 @@
 #include "question.h"
 
 QuestionList CreateEnglishWordExam();
+
+QuestionList CreateEnglishPhraseExam();
