@@ -3,6 +3,7 @@
 #include <random>
 #include"question.h"
 #include"exam_japanese.h"
+#include"exam_english.h"
 
 using namespace std;
 
@@ -35,14 +36,14 @@ int main()
 
 	x = uniform_int_distribution<>(1, 30)(rand);
 	y = uniform_int_distribution<>(1, 30)(rand);
-	questions[1].q = to_string(x*y) + "÷" + to_string(y) + "の答えは?";
+	questions[1].q = to_string(x * y) + "÷" + to_string(y) + "の答えは?";
 	questions[1].a = to_string(x);
 
 	x = uniform_int_distribution<>(1, 100)(rand);
 	y = uniform_int_distribution<>(1, 10)(rand);
 	int z = uniform_int_distribution<>(1, 10)(rand);
 	int w = uniform_int_distribution<>(1, 10)(rand);
-	questions[2].q = to_string(x) + "-(" + to_string(y*w) + "+" + to_string(z*w) + ")÷" + to_string(w) + "の答えは?";
+	questions[2].q = to_string(x) + "-(" + to_string(y * w) + "+" + to_string(z * w) + ")÷" + to_string(w) + "の答えは?";
 	questions[2].a = to_string(x - (y + z));
 
 	x = uniform_int_distribution<>(1, 10)(rand);
@@ -52,14 +53,14 @@ int main()
 		});
 
 	x = uniform_int_distribution<>(1, 10)(rand);
-	y = uniform_int_distribution<>(1, 5)(rand)*3;
+	y = uniform_int_distribution<>(1, 5)(rand) * 3;
 	questions.push_back({ "底面積の半径" + to_string(x) + "cm、高さ" + to_string(y) + "cmの円錐がある。\n" + "この円錐の体積をXπcm^3とする。Xの値を求めよ。" ,
-		to_string(x * x * y / 3)});
+		to_string(x * x * y / 3) });
 
 	x = uniform_int_distribution<>(1, 3)(rand) * 3;
 	questions.push_back({
 		"半径" + to_string(x) + "cmの球がある。\n" + "この球の体積をXπcm^3とする。Xの値を求めよ。"
-		,to_string(4 * x * x * x /3 )
+		,to_string(4 * x * x * x / 3)
 		});
 
 	//サイコロ
@@ -68,8 +69,8 @@ int main()
 	z = gcd(y + 1, 6);
 	questions.push_back({
 		"サイコロを1個振って、" + to_string(x) + "から" + to_string(x + y) + "がでる確率を求めよ。",
-		to_string((y + 1)/z) + "/" + to_string(6/z)
-	});
+		to_string((y + 1) / z) + "/" + to_string(6 / z)
+		});
 
 	//順列
 	x = uniform_int_distribution<>(3, 7)(rand);
@@ -104,16 +105,13 @@ int main()
 
 	cout << "[リクルート試験対策クイズ]\n";
 
-	cout << "教科を選んでください\n1=数学\n2=国語\n";
+	cout << "教科を選んでください\n1=数学\n2=国語\n3=英語\n";
 	int subject;
 	cin >> subject;
-	switch (subject)
+	if (subject == 2)
 	{
-	case 1:
-		break;
-	case 2:
 		questions = CreateKanjiExam();
-		const QuestionList idiomExam = CreateIdiomExam();
+		QuestionList idiomExam = CreateIdiomExam();
 		questions.insert(questions.end(), idiomExam.begin(), idiomExam.end());
 		QuestionList homophoneExam = CreateHomophoneExam();
 		questions.insert(questions.end(), homophoneExam.begin(), homophoneExam.end());
@@ -121,8 +119,12 @@ int main()
 		questions.insert(questions.end(), antonyExam.begin(), antonyExam.end());
 		QuestionList synonyExam = CreateSynonymExam();
 		questions.insert(questions.end(), synonyExam.begin(), synonyExam.end());
-		break;
 	}
+	else if (subject == 3)
+	{
+		questions = CreateEnglishWordExam();
+	}
+
 
 	for (const auto& e : questions) {
 		cout << e.q << "\n";
